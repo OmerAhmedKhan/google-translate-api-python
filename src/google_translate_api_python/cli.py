@@ -37,7 +37,7 @@ def google_translate_api_cli():
     translate.add_argument('-i', '--in_lang', \
         help='Language name or code for text to translate in. e.g("ur", "en")', required=True)
     translate.add_argument('-f', '--from_lang', \
-        help='Language name or code for provided text. e.g("ur", "en")', default='auto')
+        help='Language name or code for provided text. e.g("ur", "en")', required=True)
     translate.add_argument('-r', '--raw_response', \
         help='Language name or code for provided text. e.g("ur", "en")', default='')
 
