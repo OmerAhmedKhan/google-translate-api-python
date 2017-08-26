@@ -8,11 +8,10 @@ import json
 import re
 from subprocess import check_output
 from urllib import urlencode
+from distutils.sysconfig import get_python_lib
 #core libraries
 import requests # pylint: disable=import-error
-from languages import is_supported_lang, get_code
-
-
+from .languages import is_supported_lang, get_code
 
 GOOGLE_TRANSLATION_URL = 'https://translate.google.com/translate_a/single'
 DATA = {
@@ -58,22 +57,26 @@ def translate(text, opts):  # pylint: disable=too-many-branches
 
     # This may seems amature way to do this, but this is the only way for now
     try:
-        token_obj = json.loads(check_output(['nodejs', 'get_token.js', text]))
-    except Exception:
-        raise
+        package_path = get_python_lib()
+        print get_python_lib()
+        token_file_path = '{}/google_translate_api_python/get_token.js'.format(package_path)
+        token_obj = json.loads(check_output(['nodejs', token_file_path, text]))
+    except Exception as e:
+        print e
+        raise Exception('Unable to get google API token')
 
     DATA[token_obj.get('name')] = token_obj.get('value')
     url = u'{}?{}'.format(GOOGLE_TRANSLATION_URL, urlencode(DATA, doseq=True))
 
     try:
         response = requests.get(url)
-    except Exception:
-        raise
+    except Exception as e:
+        raise Exception(e)
 
     try:
         body = json.loads(response.content)
     except Exception:
-        raise
+        raise ValueError('Unable to load JSON')
 
     result = {
         'text': '',
