@@ -58,7 +58,6 @@ def translate(text, opts):  # pylint: disable=too-many-branches
     # This may seems amature way to do this, but this is the only way for now
     try:
         package_path = get_python_lib()
-        print get_python_lib()
         token_file_path = '{}/google_translate_api_python/get_token.js'.format(package_path)
         token_obj = json.loads(check_output(['nodejs', token_file_path, text]))
     except Exception as e:
@@ -119,38 +118,5 @@ def translate(text, opts):  # pylint: disable=too-many-branches
             result['from_lang']['text']['didYouMean'] = True
 
     return result
-
-
-def main():
-    """
-    Test/Console method
-    """
-    import argparse
-    parser = argparse.ArgumentParser(\
-        description='Script to provide unlimited tranlation from google tanslate api')
-    parser.add_argument('-t', '--text', help='Text to translate', required=True)
-    parser.add_argument('-i', '--in_lang', \
-        help='Language name or code for text to translate in. e.g("ur", "en")', required=True)
-    parser.add_argument('-f', '--from_lang', \
-        help='Language name or code for provided text. e.g("ur", "en")', default='auto')
-    parser.add_argument('-r', '--raw_response', \
-        help='Language name or code for provided text. e.g("ur", "en")', default='')
-    args = parser.parse_args()
-
-    opts = {
-        'to_lang': args.in_lang,
-        'from_lang': args.from_lang,
-        'raw': args.raw_response
-    }
-    text = args.text
-
-    try:
-        print translate(text, opts)
-    except Exception as e:   # pylint: disable=broad-except
-        print 'Something went wrong!'
-        print e
-
-if __name__ == '__main__':
-    main()
 
 # pylint 10.00/10

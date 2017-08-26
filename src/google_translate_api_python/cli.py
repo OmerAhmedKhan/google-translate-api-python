@@ -43,7 +43,9 @@ def google_translate_api_cli():
 
     args = parser.parse_args()
     if args.action == 'supported_languages':
-        print LANGUAGES
+        for key, value in sorted(LANGUAGES.items(), key=lambda value: value[1]):
+            print 'Language: {} \t Code: {}'.format(value, key)
+
         return
 
     text = getattr(args, 'text', None)
@@ -58,10 +60,17 @@ def google_translate_api_cli():
 
     result = translate_method(text, {'from_lang': from_lang, 'to_lang':to_lang, 'raw':getattr(args, 'raw_response', None)})
 
+    correct_input_text = result.get('from_lang', {}).get('text', {}).get('value', '')
+    if result.get('from_lang', {}).get('text', {}).get('autoCorrected', False):
+        print 'Text auto corrected to "{}"'.format(correct_input_text)
+
+    if result.get('from_lang', {}).get('text', {}).get('didYouMean', False):
+        print 'Did you mean "{}"?'.format(correct_input_text)
+
     if getattr(args, 'raw_response', None):
         print result.get('raw', 'something went wrong')
     else:
-        print result.get('text', 'something went wrong')
+        print u'Translation: "{}"'.format(result.get('text', 'something went wrong'))
 
 
 # pylint 10.00/10.00
