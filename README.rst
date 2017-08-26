@@ -7,6 +7,13 @@
 
 This project provides a way to get unlimited Google tranlate API without providing you API access keys. It removes all wories of limited API hit per day for free users and paying is not an option.
 
+Features 
+=============
+
+- Auto language detection
+- Spelling and Language correction
+- Authentication – Results are provided from [translate.google.com](https://translate.google.com)
+
 Project Setup
 =============
 
@@ -82,3 +89,8 @@ Authors
 =======
 
 * Omer Ahmed Khan
+
+Credit and Related
+=======
+
+* Matheus Fernandes (https://github.com/matheuss/google-translate-api)
