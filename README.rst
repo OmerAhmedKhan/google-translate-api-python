@@ -15,12 +15,11 @@ Please follow these instructions to get this project running.
 Instructions
 ------------
 
-#. Clone the project ``google-translate-api-python``:
+#. Clone the project ``google-translate-api-python``::
 
-        git clone 
+        git clone
         cd google-translate-api-python
-
-
+ 
 #. Install pip package through::
 
         pip install .
@@ -36,25 +35,26 @@ The tool ``google_translate`` provide you a cli interface which provide you resu
 3. Find and Translate
 
 **Supported Languages**
-It will display all supported languages and there codes for this API, which also include ``auto`` which means google will try to figure out the language itself
-
+It will display all supported languages and there codes for this API, which also include ``auto`` which means google will try to figure out the language itself.::
 
         google_translate supported_languages
 
 **Translate Language**
-It will translate provided text to a language provided through parameter, it is a fast method to translate to specific language as it will skip language guessing part.
+It will translate provided text to a language provided through parameter, it is a fast method to translate to specific language as it will skip language guessing part.::
+
 
         google_translate translate -t "Hello" -f "en" -i "ur"
 
-The above command will translate ``Hello`` to urdu language which is ``ہیلو``. To get exact output from ``google-translate-api`` provide a opitional parameter ``-r`` which redirect raw output from Google translate API.
+The above command will translate ``Hello`` to urdu language which is ``ہیلو``. To get exact output from ``google-translate-api`` provide a opitional parameter ``-r`` which redirect raw output from Google translate API.::
+
 
         google_translate translate -t "Hello" -i "ur" -r raw
 
 **Find and Translate Language**
 It is almost same as previous action translate, it just not required ``-f`` parameter and API will itself figure out the language of provided text. It also provide same optional raw parameter
+:
 
         google_translate translate -t "Hello" -i "ur"
-
 
 
 Using Google Translate API through Script
