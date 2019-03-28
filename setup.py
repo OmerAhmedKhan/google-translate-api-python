@@ -25,7 +25,7 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     package_data={'': ['get_token.js']},
-    install_requires=['requests==2.18.1', 'urllib3==1.21.1'],
+    install_requires=['requests', 'urllib3'],
     include_package_data=True,
     zip_safe=False,
     entry_points={
